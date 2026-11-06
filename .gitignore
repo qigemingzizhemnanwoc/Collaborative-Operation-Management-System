@@ -1,0 +1,36 @@
+# Local secrets and personal/tool configuration
+.env
+.env.*
+!.env.example
+**/*.env
+**/*.local
+**/application-local.*
+**/application-production.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+.ssh/
+.aws/
+.codex/
+.agents/
+.idea/
+.vscode/
+# Generated/private data
+**/target/
+**/node_modules/
+**/dist/
+**/__pycache__/
+uploads/
+**/uploads/
+data/
+backups/
+*.dump
+*.sql.gz
+*.bak
+*.patch
+*.log
+.DS_Store
+Thumbs.db

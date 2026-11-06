@@ -1,0 +1,4 @@
+* text=auto
+back/mvnw text eol=lf
+*.sh text eol=lf
+*.sql text eol=lf
