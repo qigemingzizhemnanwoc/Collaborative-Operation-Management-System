@@ -34,3 +34,9 @@ backups/
 *.log
 .DS_Store
 Thumbs.db
+
+# Private interview learning notes
+**/01-stock-concurrency.md
+**/02-employee-database-api.md
+**/03-redis-duplicate-submit.md
+**/04-docker-ci.md

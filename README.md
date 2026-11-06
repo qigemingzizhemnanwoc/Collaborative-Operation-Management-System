@@ -79,13 +79,6 @@ docker compose -p ecs-portfolio restart
 
 [GitHub Actions](.github/workflows/verify.yml) 已配置 Java17、临时 MySQL/Redis、指定 JUnit 集合、Vue 构建和两个镜像构建；**远程工作流尚未验证通过**，不展示未经验证的通过徽章。不是所有已有测试都纳入上述限定集合。
 
-## 学习资料
-
-- [01 库存并发与事务](docs/interview-notes/01-stock-concurrency.md)
-- [02 员工数据库与接口](docs/interview-notes/02-employee-database-api.md)
-- [03 Redis防重复提交](docs/interview-notes/03-redis-duplicate-submit.md)
-- [04 Docker与CI](docs/interview-notes/04-docker-ci.md)
-
 ## 已知限制
 
 - 本机限定验收不是生产验收；没有性能提升数据，也没有完整浏览器页面自动化。
