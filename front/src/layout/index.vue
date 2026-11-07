@@ -2,7 +2,7 @@
   <el-container class="layout-container">
     <el-aside v-if="showSidebar" :width="sidebarWidth" class="app-aside">
       <div :class="['brand-block', { 'brand-block--collapsed': isSidebarCollapsed }]">
-        <h3 class="brand-title">{{ isSidebarCollapsed ? 'ECS' : '企业协同运营管理系统' }}</h3>
+        <h3 class="brand-title">企业运营管理系统</h3>
       </div>
       <el-menu
         class="app-menu"

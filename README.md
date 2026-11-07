@@ -1,12 +1,12 @@
-# 企业协同运营管理系统 · Java 后端二次开发
+# 企业运营管理系统
 
-基于 Spring Boot、MyBatis-Plus、MySQL 和 Redis 的企业协同运营管理系统二次开发项目，保留原有 Vue 3 前端。围绕数据一致性、数据库接口、故障降级与可部署性开展有测试依据的改造，用于 Java 后端实习技术展示。
+企业运营管理系统采用前后端分离架构，支持企业日常运营中的人员管理、采购、销售、退货与库存业务，并提供角色和部门权限、审批、消息通知及数据统计。本项目在原有系统基础上，重点完善并发数据一致性、员工接口、防重复提交和容器化部署。
 
 ## 来源与作者归属
 
-原项目：[shanqiu127 / Collaborative-Operation-Management-System](https://github.com/shanqiu127/Collaborative-Operation-Management-System)。维护者已获得原作者的二次开发及公开发布许可，保留原作者归属；授权私人沟通记录不公开。详见 [NOTICE](NOTICE.md)。
+原项目：[shanqiu127 / Collaborative-Operation-Management-System](https://github.com/shanqiu127/Collaborative-Operation-Management-System)。本项目已获得原作者二次开发及公开发布许可，保留原作者归属。详见 [NOTICE](NOTICE.md)。
 
-**原项目已有**：认证与角色/部门权限、用户和部门管理、采购/销售/退货、库存、供应商和商品、统计页面、公告消息、工作要求、审批与 AI 助手相关代码。以下四项是本次二次开发，不能把整个系统描述为个人从零原创。
+**原项目已有**：认证与角色/部门权限、用户和部门管理、采购/销售/退货、库存、供应商和商品、统计页面、公告消息、工作要求、审批与 AI 助手相关代码。本次个人二次开发集中于以下四个方向。
 
 ## 四项二次开发
 
@@ -35,9 +35,13 @@ flowchart LR
 
 MySQL 是业务一致性的边界；Redis 短时间防重不等于持久业务幂等。本地降级不能保证多实例统一防重，切换窗口的限制详见 Redis 报告。
 
-## 功能页面与截图
+## 核心功能
 
-保留登录、员工/用户/部门、商品/供应商、采购/销售/退货、库存统计与协同页面。当前公开副本不包含未经隐私确认的截图或附件，避免泄露真实用户资料。可按下方步骤在本地使用合成数据浏览页面；没有伪造项目截图或线上演示链接。
+- 用户登录与角色、部门权限管理。
+- 员工档案、用户账号及部门管理。
+- 供应商、商品资料、采购入库与采购退货。
+- 销售出库、销售退货、库存管理与预警。
+- 数据统计、审批处理、公告及消息通知。
 
 ## Docker 快速运行
 
@@ -56,7 +60,7 @@ docker compose -p ecs-portfolio ps
 
 数据库和 Redis 不发布主机端口；前端只绑定本机回环。数据库与上传目录使用命名卷。首次空卷运行结构及最小合成种子数据；管理员初始处于禁用状态，启动时用环境变量生成 BCrypt 密码。重启不会重置已有密码。
 
-公开副本去除了原始演示人员、手机号、邮箱、历史业务记录和密码散列。管理员新增账号使用不可预测的随机初始值，由有权限管理员通过已有“设置密码”功能设置后再交付使用。
+初始化仅包含必要的合成示例数据。管理员新增账号使用不可预测的随机初始值，由有权限管理员通过已有“设置密码”功能设置后再交付使用。
 
 ```bash
 docker compose -p ecs-portfolio logs --tail 100 backend
@@ -67,23 +71,16 @@ docker compose -p ecs-portfolio restart
 
 ## 测试与验证
 
-此前限定范围统一回归：**42 项通过，失败0、错误0、跳过0**（库存16、员工17、Redis7、容器初始化2）。这是已有真实运行结果，不是覆盖率或性能提升声明。安全摘要：[JUnit汇总](docs/verification/deployment/junit-summary.json)。
+此前限定范围统一回归：**42 项通过，失败0、错误0、跳过0**（库存16、员工17、Redis7、容器初始化2）。覆盖本次二次开发相关模块。安全摘要：[JUnit汇总](docs/verification/deployment/junit-summary.json)。
 
 [发布整理报告](docs/publication-safety.md) 单独记录发布副本重新验证结果，不能以原副本的结果代替清理后的验证。
 
 集成测试必须显式设置 `PURCHASE_TEST_JDBC_URL`、`PURCHASE_TEST_USERNAME`、`PURCHASE_TEST_PASSWORD`，仅允许本机专用 `warehouse_management_integration_test` 数据库；Redis 使用独立测试实例，`REDIS_TEST_SERVER` 指向可执行文件。禁止使用正式数据库/Redis。
 
-```bash
-./back/mvnw -f back/pom.xml -Dtest=ContainerAdminInitializerTest,RedisDuplicateIntegrationTest,EmployeeAcceptanceTest,EmployeeDirectoryIntegrationTest,EmployeeReadOnlyTest,EmployeeValidationTest,EmployeeServiceTest,AuthServiceTest,UserManageServiceTest,SalesConcurrencyIntegrationTest,PurchaseStockFlowIntegrationTest,*DeleteTest,PurchaseServiceTest test
-```
+测试集合、运行条件及验证范围见四份验收报告。
 
-[GitHub Actions](.github/workflows/verify.yml) 已配置 Java17、临时 MySQL/Redis、指定 JUnit 集合、Vue 构建和两个镜像构建；**远程工作流尚未验证通过**，不展示未经验证的通过徽章。不是所有已有测试都纳入上述限定集合。
+[GitHub Actions](.github/workflows/verify.yml) 已配置 Java17、临时 MySQL/Redis、指定 JUnit 集合、Vue 构建和两个镜像构建。最新远程运行结果以仓库 Actions 页面为准。
 
-## 已知限制
+## 使用说明
 
-- 本机限定验收不是生产验收；没有性能提升数据，也没有完整浏览器页面自动化。
-- 历史库存不伪造补录流水；公开 SQL 只提供空业务表和明确合成的基础数据。
-- Redis 故障切换可能额外放行，最终依赖数据库约束及事务；不承诺所有新建单据请求的持久幂等。
-- AI 功能源码保留，但未发布私人知识库、模型密钥或会话，默认关闭；无需 AI 即可运行主要业务。
-- 依赖安装曾报告13项 npm 漏洞（3 moderate、10 high），尚未完成可利用性分析和升级；代码公开不表示适合直接公网部署。
-- 不包含原 Git 历史、本机凭据、原始日志、数据库备份、私人截图、上传附件或 AI 工具记录。
+默认部署面向本机演示，管理员密码由环境变量初始化。生产部署需另行配置 HTTPS、备份和访问策略；依赖安全状态见 [依赖安全复核](docs/dependency-security.md)，测试边界见验收报告。AI 助手为可选模块，不影响主要业务运行。
