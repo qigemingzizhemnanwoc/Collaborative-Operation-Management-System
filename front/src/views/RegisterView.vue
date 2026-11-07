@@ -7,7 +7,7 @@
 
     <main class="register-shell">
       <section class="brand-panel">
-        <p class="brand-tag">ENTERPRISE COLLABORATION OPERATIONS SYSTEM</p>
+        <p class="brand-tag">OpsLattice</p>
         <h1>开始你的<br>协同运营</h1>
         <p class="brand-desc">
           一个现代化的企业协同运营解决方案

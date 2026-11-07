@@ -51,7 +51,7 @@
           </div>
           <div class="header-info">
             <h1 class="header-title">项目助手</h1>
-            <p class="header-subtitle">仅回答当前企业运营管理系统项目相关问题 · 回答基于项目文档生成并附来源</p>
+            <p class="header-subtitle">仅回答当前OpsLattice项目相关问题 · 回答基于项目文档生成并附来源</p>
             <div class="assistant-controls">
               <div class="mode-switch" :class="{ 'mode-switch--disabled': isLoading || isHistoryMode }">
                 <button
@@ -284,8 +284,8 @@ const copiedMessageState = reactive({})
 const copyResetTimers = new Map()
 const KB_MISS_HINT_TEXT = '抱歉，我没有找到相关的知识库，请您提供更多的信息或者尝试其他的关键词。接下来采用大模型进行搜索为你解答。'
 const STRICT_MODE_HINT_TEXT = '仅按项目文档回答模式下，当前未找到足够依据回答这个问题。你可以补充更具体的项目关键词，或切换到“文档优先，不足时允许模型补充”。'
-const EMPLOYEE_BOUNDARY_MSG = '我目前只负责说明当前企业运营管理系统项目，暂时不回答项目范围外的问题。你可以问我项目功能、技术栈、部署方式、模块职责、接口范围、角色权限或业务流程。'
-const EMPLOYEE_BOUNDARY_HINT = '普通员工账号仅支持当前企业运营管理系统项目内问答，不会切换到项目外通用模型。优先提问页面功能、角色权限、业务流程、部署接口等内容。'
+const EMPLOYEE_BOUNDARY_MSG = '我目前只负责说明当前OpsLattice项目，暂时不回答项目范围外的问题。你可以问我项目功能、技术栈、部署方式、模块职责、接口范围、角色权限或业务流程。'
+const EMPLOYEE_BOUNDARY_HINT = '普通员工账号仅支持当前OpsLattice项目内问答，不会切换到项目外通用模型。优先提问页面功能、角色权限、业务流程、部署接口等内容。'
 const ANSWER_MODE = {
   STRICT: 'strict',
   HYBRID: 'hybrid'
@@ -541,7 +541,7 @@ const getOperationalHintBadge = (msg) => {
 const getOperationalHintText = (msg) => {
   if (!msg) return ''
   if (isEmployeeBoundaryMessage(msg)) {
-    return '普通员工账号只开放当前企业运营管理系统项目内问答；请改问页面功能、角色权限、审批流程、部署接口或业务流程。'
+    return '普通员工账号只开放当前OpsLattice项目内问答；请改问页面功能、角色权限、审批流程、部署接口或业务流程。'
   }
   if (msg.hitType === 'rate-limited') {
     return '当前账号请求过于频繁，系统已临时限制模型调用，请稍后再试。'

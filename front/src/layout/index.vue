@@ -2,7 +2,7 @@
   <el-container class="layout-container">
     <el-aside v-if="showSidebar" :width="sidebarWidth" class="app-aside">
       <div :class="['brand-block', { 'brand-block--collapsed': isSidebarCollapsed }]">
-        <h3 class="brand-title">企业运营管理系统</h3>
+        <h3 class="brand-title">OpsLattice</h3>
       </div>
       <el-menu
         class="app-menu"
@@ -106,7 +106,7 @@
               <component :is="isSidebarCollapsed ? Expand : Fold" />
             </el-icon>
           </el-button>
-          <div class="header-title">企业协同运营后台</div>
+          <div class="header-title">OpsLattice</div>
         </div>
         <div class="header-actions">
           <MessageCenter v-if="showMessageCenter" />

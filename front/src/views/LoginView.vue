@@ -7,7 +7,7 @@
 
     <main class="login-shell">
       <section class="brand-panel">
-        <p class="brand-tag">ENTERPRISE COLLABORATION OPERATIONS SYSTEM</p>
+        <p class="brand-tag">OpsLattice</p>
         <h1>协同有序，<br>运营可控</h1>
         <p class="brand-desc">
           覆盖进销退存、审批追溯、任务闭环与消息协同，
@@ -37,7 +37,7 @@
         <div class="panel-header">
           <p class="kicker">SIGN IN</p>
           <h2>欢迎回来</h2>
-          <p class="subtitle">输入账号信息进入企业协同运营后台</p>
+          <p class="subtitle">输入账号信息进入OpsLattice</p>
         </div>
 
         <el-form
